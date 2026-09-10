@@ -47,7 +47,7 @@ BEGIN
     ) THEN
 
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Department "Sale" cannot add more user';
+        SET MESSAGE_TEXT = 'QLDepartment.java "Sale" cannot add more user';
 
     END IF;
 END $$
@@ -149,7 +149,7 @@ DELIMITER ;
 
 -- =========================================================
 -- QUESTION 6
--- Nếu không nhập department_id thì đưa vào waiting Department
+-- Nếu không nhập department_id thì đưa vào waiting QLDepartment.java
 -- INSERT -> account -> BEFORE -> NEW.department_id
 -- =========================================================
 
@@ -166,11 +166,11 @@ BEGIN
     -- nếu không nhập department_id
     IF NEW.department_id IS NULL THEN
 
-        -- lấy department_id của waiting Department
+        -- lấy department_id của waiting QLDepartment.java
         SELECT department_id
         INTO v_department_id
         FROM department
-        WHERE department_name = 'waiting Department';
+        WHERE department_name = 'waiting QLDepartment.java';
 
         -- gán department_id
         SET NEW.department_id = v_department_id;

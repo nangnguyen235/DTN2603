@@ -17,7 +17,7 @@ public class Exercise_05 {
 
         @Override
         public String toString() {
-            return "Department{" +
+            return "QLDepartment.java{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     '}';

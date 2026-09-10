@@ -17,7 +17,7 @@ public class Exercise6 {
         for (Account a : accounts) {
             String depName = (a.department != null) ? a.department.name : "Chưa có";
             String posName = (a.position != null && a.position.name != null) ? a.position.name.name() : "Chưa có";
-            System.out.println("Id: " + a.id + " | FullName: " + a.fullName + " | Email: " + a.email + " | Department: " + depName + " | Position: " + posName);
+            System.out.println("Id: " + a.id + " | FullName: " + a.fullName + " | Email: " + a.email + " | QLDepartment.java: " + depName + " | Position: " + posName);
         }
     }
 

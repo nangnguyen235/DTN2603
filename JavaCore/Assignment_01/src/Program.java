@@ -8,7 +8,7 @@ public class Program {
         // Q2: Tạo Object
         // =========================
 
-        // Department
+        // QLDepartment.java
         Department dep1 = new Department();
         dep1.departmentId = 1;
         dep1.departmentName = "Marketing";
@@ -208,14 +208,14 @@ public class Program {
         // Q3: In thông tin Object
         // =========================
 
-        System.out.println("Thông tin các Department:");
-        System.out.println("Department 1: ID: " + dep1.departmentId
+        System.out.println("Thông tin các QLDepartment.java:");
+        System.out.println("QLDepartment.java 1: ID: " + dep1.departmentId
                 + " Name: " + dep1.departmentName);
 
-        System.out.println("Department 2: ID: " + dep2.departmentId
+        System.out.println("QLDepartment.java 2: ID: " + dep2.departmentId
                 + " Name: " + dep2.departmentName);
 
-        System.out.println("Department 3: ID: " + dep3.departmentId
+        System.out.println("QLDepartment.java 3: ID: " + dep3.departmentId
                 + " Name: " + dep3.departmentName);
 
 

@@ -102,6 +102,7 @@ public class QuanLySach implements IQuanLySach {
         inDuongKe();
     }
 
+
     @Override
     public void timKiemTheoLoai() {
         System.out.println("--- TÌM KIẾM TÀI LIỆU THEO LOẠI ---");
@@ -155,4 +156,5 @@ public class QuanLySach implements IQuanLySach {
             System.out.printf("|%10s|%12d|%20s|%15d|%35s|\n", "Báo", b.getMaTaiLieu(), b.getten(), b.getSoBan(), thongTin);
         }
     }
+
 }

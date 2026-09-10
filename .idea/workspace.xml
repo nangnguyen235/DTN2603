@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5b8a1c68-ec03-4e97-9243-605ee2613038" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTN2603.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/.idea/JavaCore.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Answer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/CategoryQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Exam.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/ExamQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Group.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/GroupAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Position.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Program.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/TapChi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_01/TypeQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_02.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_05.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_06.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaCore/Assignment_02/Exercise_06.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_03/Exercise_05.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaCore/Assignment_03/Exercise_05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaCore/Assignment_04/backend/QuanLySach.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaCore/Assignment_04/backend/QuanLySach.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MySQL/Assignment_06.sql" beforeDir="false" afterPath="$PROJECT_DIR$/MySQL/Assignment_06.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MySQL/Assignment_07.sql" beforeDir="false" afterPath="$PROJECT_DIR$/MySQL/Assignment_07.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000000000031104" />
+      <entry key="S5" value="1.0000249534704404" />
+      <entry key="S10" value="1.0049953448770186" />
+      <entry key="S30" value="1.170944510534536" />
+      <entry key="S60" value="1.4134543633370418" />
+      <entry key="M2" value="1.6430237132860586" />
+      <entry key="M5" value="1.9074030601698904" />
+      <entry key="M10" value="3.932579430049859" />
+      <entry key="M15" value="10.340593357870722" />
+      <entry key="M30" value="43.559542499202884" />
+      <entry key="H1" value="100.01606090375125" />
+      <entry key="H2" value="154.4446938578708" />
+      <entry key="H4" value="192.69094925665158" />
+      <entry key="D1" value="232.14150491568284" />
+      <entry key="W1" value="239.71314780984363" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="3.534165199361162E-234" />
+      <entry key="S10" value="3.216651439129322E-117" />
+      <entry key="S30" value="5.085521651146493E-39" />
+      <entry key="S60" value="2.287981146057651E-19" />
+      <entry key="M2" value="1.96900842417528E-9" />
+      <entry key="M5" value="0.0027085559210249023" />
+      <entry key="M10" value="0.3783037269312922" />
+      <entry key="M15" value="2.0763502659546957" />
+      <entry key="M30" value="11.858244019996967" />
+      <entry key="H1" value="28.832842351889383" />
+      <entry key="H2" value="45.17149022508686" />
+      <entry key="H4" value="56.60853870175327" />
+      <entry key="D1" value="68.3655284754102" />
+      <entry key="W1" value="70.61742049494768" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.026278012976678578" />
+      <entry key="MS500" value="0.4829681644624228" />
+      <entry key="S2" value="0.8336420754288576" />
+      <entry key="S5" value="0.929827799683084" />
+      <entry key="S10" value="0.969044845061568" />
+      <entry key="S30" value="1.1564057688108937" />
+      <entry key="S60" value="1.404395239826864" />
+      <entry key="M2" value="1.6376489234486538" />
+      <entry key="M5" value="1.9074921870294868" />
+      <entry key="M10" value="4.3067237645785665" />
+      <entry key="M15" value="12.407849158701291" />
+      <entry key="M30" value="55.39653784359034" />
+      <entry key="H1" value="128.82399460605586" />
+      <entry key="H2" value="199.5968360340025" />
+      <entry key="H4" value="249.28739207565192" />
+      <entry key="D1" value="300.5046011900421" />
+      <entry key="W1" value="310.3302094382125" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3J27zsDyLmNajCqneBc9XWbue5o" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JAR Application.mysql-connector-j-9.7.0.jar.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow.Version Control.ShowToolbar": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/DTN2603/JavaCore/Assignment_05",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.editor.code.editing",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\DTN2603\JavaCore\Assignment_05" />
+      <recent name="E:\DTN2603\JavaCore\chua-bai-tap-oop\chua-bai-tap-oop\src" />
+      <recent name="E:\DTN2603\JavaCore\Assignment_04" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\DTN2603\JavaCore\Assignment_05" />
+      <recent name="E:\DTN2603\JavaCore\Assignment_05\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="mysql-connector-j-9.7.0.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/JavaCore/chua-bai-tap-oop/chua-bai-tap-oop/src/mysql-connector-j-9.7.0.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DTN2603" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DTN2603" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JAR Application.mysql-connector-j-9.7.0.jar" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5b8a1c68-ec03-4e97-9243-605ee2613038" name="Changes" comment="" />
+      <created>1788847574767</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1788847574767</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

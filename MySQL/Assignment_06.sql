@@ -193,11 +193,11 @@ BEGIN
     LIMIT 1;
 
     -- Lấy phòng chờ việc
-    -- Đổi 'Waiting Department' thành tên phòng thực tế của bạn
+    -- Đổi 'Waiting QLDepartment.java' thành tên phòng thực tế của bạn
     SELECT department_id
     INTO v_department_id
     FROM department
-    WHERE department_name = 'Waiting Department'
+    WHERE department_name = 'Waiting QLDepartment.java'
     LIMIT 1;
 
     -- Tạo account
@@ -374,7 +374,7 @@ CALL sp_q10_delete_exam_3_years_ago();
 -- QUESTION 11
 -- Xóa department theo tên
 -- Account thuộc department đó chuyển sang
--- department mặc định: Waiting Department
+-- department mặc định: Waiting QLDepartment.java
 -- =========================================================
 
 DELIMITER $$
@@ -398,7 +398,7 @@ BEGIN
     SELECT department_id
     INTO v_default_department_id
     FROM department
-    WHERE department_name = 'Waiting Department'
+    WHERE department_name = 'Waiting QLDepartment.java'
     LIMIT 1;
 
     -- Đếm số account sẽ được chuyển
@@ -419,7 +419,7 @@ BEGIN
     -- In kết quả
     SELECT
         v_account_count AS accounts_moved,
-        'Department deleted successfully' AS message;
+        'QLDepartment.java deleted successfully' AS message;
 
 END $$
 

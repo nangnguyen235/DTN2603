@@ -112,18 +112,18 @@ public class Exercise5 {
         return acc;
     }
 
-    // Question 6: Tạo Department
+    // Question 6: Tạo QLDepartment.java
     public static Department question6CreateDepartment() {
         Department dep = new Department();
-        System.out.print("Nhập ID Department: ");
+        System.out.print("Nhập ID QLDepartment.java: ");
         dep.id = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Nhập Tên Department: ");
+        System.out.print("Nhập Tên QLDepartment.java: ");
         dep.name = scanner.nextLine();
 
         departmentList.add(dep);
-        System.out.println("Tạo Department thành công!");
+        System.out.println("Tạo QLDepartment.java thành công!");
         return dep;
     }
 
@@ -233,7 +233,7 @@ public class Exercise5 {
         while (true) {
             System.out.println("\n===== MENU CHỨC NĂNG =====");
             System.out.println("1. Tạo Account");
-            System.out.println("2. Tạo Department");
+            System.out.println("2. Tạo QLDepartment.java");
             System.out.println("3. Thêm Group vào Account");
             System.out.println("4. Thêm Account vào Group ngẫu nhiên");
             System.out.print("Mời bạn nhập vào chức năng muốn sử dụng: ");

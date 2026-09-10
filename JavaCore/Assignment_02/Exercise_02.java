@@ -33,7 +33,7 @@ public class Exercise2 {
         Account[] accounts = {acc1, acc2};
 
         System.out.println("+----+---------------------------+---------------------+---------------------+");
-        System.out.printf("| %-2s | %-25s | %-19s | %-19s |%n", "ID", "Email", "Full Name", "Department");
+        System.out.printf("| %-2s | %-25s | %-19s | %-19s |%n", "ID", "Email", "Full Name", "QLDepartment.java");
         System.out.println("+----+---------------------------+---------------------+---------------------+");
         for (Account a : accounts) {
             String depName = (a.department != null) ? a.department.name : "";
