@@ -4,48 +4,35 @@ import entity.Account;
 import entity.Department;
 import entity.Position;
 import entity.enums.PositionName;
+import utils.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class QLAccount implements IQLAccount {
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void hienThiThongTin() {
         List<Account> list = new ArrayList<>();
-        String url = "jdbc:mysql://localhost:3306/dtn2603_testing_system";
-        String username = "root";
-        String password = "1234";
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException ignored) {
-        }
-
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            if (connection != null) {
-                System.out.println("Kết nối DB thành công");
-            } else {
-                System.out.println("Kết nối DB không thành công");
-                return;
-            }
-
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String sql = "SELECT a.*, d.department_name, p.position_name " +
                          "FROM `account` a " +
                          "LEFT JOIN `department` d ON a.department_id = d.department_id " +
                          "LEFT JOIN `position` p ON a.position_id = p.position_id;";
-            
+
             try {
                 executeQueryAndFillList(connection, sql, list);
             } catch (SQLException e) {
-                // Nếu câu query join lỗi (do tên cột/bảng có thể khác đôi chút), fallback truy vấn đơn giản từ bảng account
+                // Fallback truy vấn đơn giản từ bảng account
                 String fallbackSql = "SELECT * FROM `account`;";
                 try {
                     executeQueryAndFillList(connection, fallbackSql, list);
@@ -59,7 +46,7 @@ public class QLAccount implements IQLAccount {
 
         // Hiển thị dạng bảng
         System.out.println("+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+");
-        System.out.printf("|%19s |%19s |%19s |%19s |%19s |%19s |%19s |%19s |%19s |\n",
+        System.out.printf("|%19s |%19s |%19s |%19s |%19s |%19s |%19s |%19s |%19s |%n",
                 "ID", "Email", "Username", "Full Name", "Department ID", "Department Name", "Position ID", "Position Name", "Create Date");
         System.out.println("+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+");
 
@@ -68,14 +55,121 @@ public class QLAccount implements IQLAccount {
                 System.out.println(acc);
             }
         } else {
-            System.out.printf("|%179s |\n", "Không có thông tin");
+            System.out.printf("|%179s |%n", "Không có thông tin");
         }
         System.out.println("+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+");
     }
 
+    @Override
+    public void themAccount() {
+        System.out.println("Nhập email:");
+        String email = scanner.nextLine();
+
+        System.out.println("Nhập username:");
+        String username = scanner.nextLine();
+
+        System.out.println("Nhập full name:");
+        String fullName = scanner.nextLine();
+
+        System.out.println("Nhập department_id:");
+        int departmentId;
+        try {
+            departmentId = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Department ID không hợp lệ!");
+            return;
+        }
+
+        System.out.println("Nhập position_id:");
+        int positionId;
+        try {
+            positionId = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Position ID không hợp lệ!");
+            return;
+        }
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO account (email, username, full_name, department_id, position_id, create_date) VALUES (?, ?, ?, ?, ?, ?);";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                ps.setString(2, username);
+                ps.setString(3, fullName);
+                ps.setInt(4, departmentId);
+                ps.setInt(5, positionId);
+                ps.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Thêm account thành công!");
+                } else {
+                    System.out.println("Thêm account không thành công!");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm account: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void xoaAccountTheoId() {
+        System.out.println("Nhập ID account muốn xóa:");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID không hợp lệ!");
+            return;
+        }
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "DELETE FROM account WHERE account_id = ?;";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Xóa account thành công!");
+                } else {
+                    System.out.println("Không tìm thấy account có ID = " + id);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi xóa account: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void suaUsernameTheoId() {
+        System.out.println("Nhập ID account muốn sửa:");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID không hợp lệ!");
+            return;
+        }
+        System.out.println("Nhập username mới:");
+        String newUsername = scanner.nextLine();
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "UPDATE account SET username = ? WHERE account_id = ?;";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, newUsername);
+                ps.setInt(2, id);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Sửa username thành công!");
+                } else {
+                    System.out.println("Không tìm thấy account có ID = " + id);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi sửa username: " + e.getMessage());
+        }
+    }
+
     private void executeQueryAndFillList(Connection connection, String sql, List<Account> list) throws SQLException {
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet resultSet = ps.executeQuery()) {
 
             ResultSetMetaData rsmd = resultSet.getMetaData();
             int colCount = rsmd.getColumnCount();
@@ -159,4 +253,4 @@ public class QLAccount implements IQLAccount {
         }
         return null;
     }
-}
+}

@@ -2,41 +2,28 @@ package backend;
 
 import entity.Position;
 import entity.enums.PositionName;
+import utils.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class QLPosition implements IQLPosition {
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void hienThiThongTin() {
         List<Position> list = new ArrayList<>();
-        String url = "jdbc:mysql://localhost:3306/dtn2603_testing_system";
-        String username = "root";
-        String password = "1234";
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException ignored) {
-        }
-
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            if (connection != null) {
-                System.out.println("Kết nối DB thành công");
-            } else {
-                System.out.println("Kết nối DB không thành công");
-                return;
-            }
-
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String sql = "SELECT * FROM position;";
-            try (Statement statement = connection.createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery()) {
 
                 ResultSetMetaData rsmd = resultSet.getMetaData();
                 int colCount = rsmd.getColumnCount();
@@ -56,16 +43,126 @@ public class QLPosition implements IQLPosition {
 
         // Hiển thị dạng bảng
         System.out.println("+--------------------+--------------------+");
-        System.out.printf("|%19s |%19s |\n", "ID", "Position Name");
+        System.out.printf("|%19s |%19s |%n", "ID", "Position Name");
         System.out.println("+--------------------+--------------------+");
         if (list.size() > 0) {
             for (Position pos : list) {
                 System.out.println(pos);
             }
         } else {
-            System.out.printf("|%39s |\n", "Không có thông tin");
+            System.out.printf("|%39s |%n", "Không có thông tin");
         }
         System.out.println("+--------------------+--------------------+");
+    }
+
+    @Override
+    public void themPosition() {
+        System.out.println("Chọn position name:");
+        PositionName[] values = PositionName.values();
+        for (int i = 0; i < values.length; i++) {
+            System.out.println((i + 1) + ". " + values[i]);
+        }
+        System.out.println("Nhập số tương ứng:");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Lựa chọn không hợp lệ!");
+            return;
+        }
+        if (choice < 1 || choice > values.length) {
+            System.out.println("Lựa chọn không hợp lệ!");
+            return;
+        }
+        PositionName selectedName = values[choice - 1];
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO position (position_name) VALUES (?);";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, selectedName.name());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Thêm position thành công!");
+                } else {
+                    System.out.println("Thêm position không thành công!");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm position: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void xoaPositionTheoId() {
+        System.out.println("Nhập ID position muốn xóa:");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID không hợp lệ!");
+            return;
+        }
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "DELETE FROM position WHERE position_id = ?;";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Xóa position thành công!");
+                } else {
+                    System.out.println("Không tìm thấy position có ID = " + id);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi xóa position: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void suaPositionNameTheoId() {
+        System.out.println("Nhập ID position muốn sửa:");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("ID không hợp lệ!");
+            return;
+        }
+        System.out.println("Chọn position name mới:");
+        PositionName[] values = PositionName.values();
+        for (int i = 0; i < values.length; i++) {
+            System.out.println((i + 1) + ". " + values[i]);
+        }
+        System.out.println("Nhập số tương ứng:");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Lựa chọn không hợp lệ!");
+            return;
+        }
+        if (choice < 1 || choice > values.length) {
+            System.out.println("Lựa chọn không hợp lệ!");
+            return;
+        }
+        PositionName selectedName = values[choice - 1];
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "UPDATE position SET position_name = ? WHERE position_id = ?;";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, selectedName.name());
+                ps.setInt(2, id);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Sửa position thành công!");
+                } else {
+                    System.out.println("Không tìm thấy position có ID = " + id);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi sửa position: " + e.getMessage());
+        }
     }
 
     private PositionName parsePositionName(String str) {
@@ -104,4 +201,4 @@ public class QLPosition implements IQLPosition {
         }
         return rs.getString(colCount >= 2 ? 2 : 1);
     }
-}
+}
