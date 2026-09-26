@@ -7,6 +7,7 @@ import entity.Account;
 import entity.Department;
 import entity.Position;
 import entity.enums.PositionName;
+import utils.ScannerUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -33,8 +34,8 @@ public class Function {// chứa các chức năng project có
     }
 
     public void themDepartment() {
-        System.out.println("Nhập tên department:");
-        String departmentName = scanner.nextLine();
+        System.out.println("Nhập tên department (3-50 kí tự):");
+        String departmentName = ScannerUtils.checkLength(3, 50);
 
         boolean check = departmentController.themDepartment(departmentName);
         if (check) {
@@ -46,13 +47,7 @@ public class Function {// chứa các chức năng project có
 
     public void xoaDepartment() {
         System.out.println("Nhập ID department muốn xóa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
+        int id = ScannerUtils.inputInt(false, 1, null);
 
         boolean check = departmentController.xoaDepartmentTheoId(id);
         if (check) {
@@ -64,15 +59,10 @@ public class Function {// chứa các chức năng project có
 
     public void suaDepartment() {
         System.out.println("Nhập ID department muốn sửa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
-        System.out.println("Nhập tên department mới:");
-        String newName = scanner.nextLine();
+        int id = ScannerUtils.inputInt(false, 1, null);
+
+        System.out.println("Nhập tên department mới (3-50 kí tự):");
+        String newName = ScannerUtils.checkLength(3, 50);
 
         boolean check = departmentController.suaDepartmentNameTheoId(id, newName);
         if (check) {
@@ -111,17 +101,7 @@ public class Function {// chứa các chức năng project có
             System.out.println((i + 1) + ". " + values[i]);
         }
         System.out.println("Nhập số tương ứng:");
-        int choice;
-        try {
-            choice = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Lựa chọn không hợp lệ!");
-            return;
-        }
-        if (choice < 1 || choice > values.length) {
-            System.out.println("Lựa chọn không hợp lệ!");
-            return;
-        }
+        int choice = ScannerUtils.inputInt(false, 1, values.length);
         PositionName selectedName = values[choice - 1];
 
         boolean check = positionController.themPosition(selectedName.name());
@@ -134,13 +114,7 @@ public class Function {// chứa các chức năng project có
 
     public void xoaPosition() {
         System.out.println("Nhập ID position muốn xóa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
+        int id = ScannerUtils.inputInt(false, 1, null);
 
         boolean check = positionController.xoaPositionTheoId(id);
         if (check) {
@@ -152,30 +126,15 @@ public class Function {// chứa các chức năng project có
 
     public void suaPosition() {
         System.out.println("Nhập ID position muốn sửa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
+        int id = ScannerUtils.inputInt(false, 1, null);
+
         System.out.println("Chọn position name mới:");
         PositionName[] values = PositionName.values();
         for (int i = 0; i < values.length; i++) {
             System.out.println((i + 1) + ". " + values[i]);
         }
         System.out.println("Nhập số tương ứng:");
-        int choice;
-        try {
-            choice = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Lựa chọn không hợp lệ!");
-            return;
-        }
-        if (choice < 1 || choice > values.length) {
-            System.out.println("Lựa chọn không hợp lệ!");
-            return;
-        }
+        int choice = ScannerUtils.inputInt(false, 1, values.length);
         PositionName selectedName = values[choice - 1];
 
         boolean check = positionController.suaPositionNameTheoId(id, selectedName.name());
@@ -210,31 +169,29 @@ public class Function {// chứa các chức năng project có
 
     public void themAccount() {
         System.out.println("Nhập email:");
-        String email = scanner.nextLine();
+        String email;
+        while (true) {
+            email = ScannerUtils.inputEmail();
+            // check xem email đã tồn tại trong DB chưa
+            boolean checkExist = accountController.checkExistByEmail(email);
+            if (checkExist) {
+                System.err.println("Email này đã tồn tại. Nhập lại!");
+                continue;
+            }
+            break;
+        }
 
-        System.out.println("Nhập username:");
-        String username = scanner.nextLine();
+        System.out.println("Nhập username (3-50 kí tự):");
+        String username = ScannerUtils.checkLength(3, 50);
 
-        System.out.println("Nhập full name:");
-        String fullName = scanner.nextLine();
+        System.out.println("Nhập full name (3-50 kí tự):");
+        String fullName = ScannerUtils.checkLength(3, 50);
 
         System.out.println("Nhập department_id:");
-        int departmentId;
-        try {
-            departmentId = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Department ID không hợp lệ!");
-            return;
-        }
+        int departmentId = ScannerUtils.inputInt(false, 1, null);
 
         System.out.println("Nhập position_id:");
-        int positionId;
-        try {
-            positionId = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Position ID không hợp lệ!");
-            return;
-        }
+        int positionId = ScannerUtils.inputInt(false, 1, null);
 
         boolean check = accountController.themAccount(email, username, fullName, departmentId, positionId);
         if (check) {
@@ -246,13 +203,7 @@ public class Function {// chứa các chức năng project có
 
     public void xoaAccount() {
         System.out.println("Nhập ID account muốn xóa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
+        int id = ScannerUtils.inputInt(false, 1, null);
 
         boolean check = accountController.xoaAccountTheoId(id);
         if (check) {
@@ -264,15 +215,10 @@ public class Function {// chứa các chức năng project có
 
     public void suaAccount() {
         System.out.println("Nhập ID account muốn sửa:");
-        int id;
-        try {
-            id = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("ID không hợp lệ!");
-            return;
-        }
-        System.out.println("Nhập username mới:");
-        String newUsername = scanner.nextLine();
+        int id = ScannerUtils.inputInt(false, 1, null);
+
+        System.out.println("Nhập username mới (3-50 kí tự):");
+        String newUsername = ScannerUtils.checkLength(3, 50);
 
         boolean check = accountController.suaUsernameTheoId(id, newUsername);
         if (check) {
@@ -298,6 +244,17 @@ public class Function {// chứa các chức năng project có
         System.out.println("+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+");
     }
 
+    // ==================== IMPORT CSV ====================
+
+    private void importCSV() {
+        // đưa file csv vào thông qua 1 đường dẫn
+        System.out.println("Nhập vào đường dẫn file csv muốn import: ");
+        String url = scanner.nextLine();
+        // đưa đường dẫn cho controller
+        String message = accountController.importCSV(url);
+        System.out.println(message);
+    }
+
     // ==================== MENU ====================
 
     public void menu() {
@@ -308,7 +265,8 @@ public class Function {// chứa các chức năng project có
             System.out.println("1. Quản lý Department.");
             System.out.println("2. Quản lý Position.");
             System.out.println("3. Quản lý Account.");
-            System.out.println("4. Thoát khỏi chương trình.");
+            System.out.println("4. Import Account từ file CSV.");
+            System.out.println("5. Thoát khỏi chương trình.");
             System.out.print("Nhập lựa chọn: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -322,6 +280,9 @@ public class Function {// chứa các chức năng project có
                     menuAccount();
                     break;
                 case "4":
+                    this.importCSV();
+                    break;
+                case "5":
                     System.out.println("Thoát chương trình. Tạm biệt!");
                     System.exit(0);
                 default:

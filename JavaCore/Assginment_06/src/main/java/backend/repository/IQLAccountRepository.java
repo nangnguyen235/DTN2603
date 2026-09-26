@@ -12,4 +12,6 @@ public interface IQLAccountRepository {
     boolean xoaAccountTheoId(int id);
 
     boolean suaUsernameTheoId(int id, String newUsername);
+
+    boolean checkExistByEmail(String email);
 }

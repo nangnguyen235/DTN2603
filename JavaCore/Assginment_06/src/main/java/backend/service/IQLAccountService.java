@@ -12,4 +12,8 @@ public interface IQLAccountService {
     boolean xoaAccountTheoId(int id);
 
     boolean suaUsernameTheoId(int id, String newUsername);
+
+    boolean checkExistByEmail(String email);
+
+    String importCSV(String url);
 }

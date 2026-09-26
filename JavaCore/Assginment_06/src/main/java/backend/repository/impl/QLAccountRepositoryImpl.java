@@ -130,4 +130,26 @@ public class QLAccountRepositoryImpl implements IQLAccountRepository {
             return null;
         }
     }
+    @Override
+    public boolean checkExistByEmail(String email) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+
+            String sql = "SELECT * FROM account WHERE email = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return true;// tồn tại
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.closeConnection(connection);
+        }
+        return false;
+    }
 }

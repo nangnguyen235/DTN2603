@@ -29,4 +29,12 @@ public class QLAccountController {
     public boolean suaUsernameTheoId(int id, String newUsername) {
         return service.suaUsernameTheoId(id, newUsername);
     }
+
+    public boolean checkExistByEmail(String email) {
+        return service.checkExistByEmail(email);
+    }
+
+    public String importCSV(String url) {
+        return service.importCSV(url);
+    }
 }
