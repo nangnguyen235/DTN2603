@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QLAccountRepositoryImpl implements IQLAccountRepository {
+
+    // ==================== Generic methods ====================
+
     @Override
     public List<Account> getAll() {
         List<Account> list = new ArrayList<>();
@@ -58,6 +61,53 @@ public class QLAccountRepositoryImpl implements IQLAccountRepository {
 
         return list;
     }
+
+    @Override
+    public boolean create(Account entity) {
+        // dùng themAccount với các field từ entity
+        return themAccount(
+                entity.getEmail(),
+                entity.getUsername(),
+                entity.getFullName(),
+                entity.getDepartment() != null ? entity.getDepartment().getDepartmentId() : 0,
+                entity.getPosition() != null ? entity.getPosition().getPositionId() : 0
+        );
+    }
+
+    @Override
+    public boolean deleteById(Integer id) {
+        return xoaAccountTheoId(id);
+    }
+
+    @Override
+    public boolean update(Integer id, Account entity) {
+        return suaUsernameTheoId(id, entity.getUsername());
+    }
+
+    @Override
+    public boolean checkExist(Integer id) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+
+            String sql = "SELECT * FROM account WHERE account_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return true;// tồn tại
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.closeConnection(connection);
+        }
+        return false;
+    }
+
+    // ==================== Account-specific methods ====================
 
     @Override
     public boolean themAccount(String email, String username, String fullName, int departmentId, int positionId) {
@@ -130,6 +180,7 @@ public class QLAccountRepositoryImpl implements IQLAccountRepository {
             return null;
         }
     }
+
     @Override
     public boolean checkExistByEmail(String email) {
         Connection connection = null;

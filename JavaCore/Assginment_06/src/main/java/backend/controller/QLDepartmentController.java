@@ -29,4 +29,8 @@ public class QLDepartmentController {
     public boolean suaDepartmentNameTheoId(int id, String newName) {
         return service.suaDepartmentNameTheoId(id, newName);
     }
+
+    public String importCSV(String url) {
+        return service.importCSV(url);
+    }
 }

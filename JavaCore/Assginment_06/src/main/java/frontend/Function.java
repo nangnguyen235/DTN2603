@@ -246,12 +246,21 @@ public class Function {// chứa các chức năng project có
 
     // ==================== IMPORT CSV ====================
 
-    private void importCSV() {
+    private void importAccountCSV() {
         // đưa file csv vào thông qua 1 đường dẫn
-        System.out.println("Nhập vào đường dẫn file csv muốn import: ");
+        System.out.println("Nhập vào đường dẫn file csv muốn import (Account): ");
         String url = scanner.nextLine();
         // đưa đường dẫn cho controller
         String message = accountController.importCSV(url);
+        System.out.println(message);
+    }
+
+    private void importDepartmentCSV() {
+        // đưa file csv vào thông qua 1 đường dẫn
+        System.out.println("Nhập vào đường dẫn file csv muốn import (Department): ");
+        String url = scanner.nextLine();
+        // đưa đường dẫn cho controller
+        String message = departmentController.importCSV(url);
         System.out.println(message);
     }
 
@@ -266,7 +275,8 @@ public class Function {// chứa các chức năng project có
             System.out.println("2. Quản lý Position.");
             System.out.println("3. Quản lý Account.");
             System.out.println("4. Import Account từ file CSV.");
-            System.out.println("5. Thoát khỏi chương trình.");
+            System.out.println("5. Import Department từ file CSV.");
+            System.out.println("6. Thoát khỏi chương trình.");
             System.out.print("Nhập lựa chọn: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -280,9 +290,12 @@ public class Function {// chứa các chức năng project có
                     menuAccount();
                     break;
                 case "4":
-                    this.importCSV();
+                    this.importAccountCSV();
                     break;
                 case "5":
+                    this.importDepartmentCSV();
+                    break;
+                case "6":
                     System.out.println("Thoát chương trình. Tạm biệt!");
                     System.exit(0);
                 default:
@@ -300,7 +313,8 @@ public class Function {// chứa các chức năng project có
             System.out.println("2. Thêm department.");
             System.out.println("3. Xóa department theo ID.");
             System.out.println("4. Sửa department_name theo ID.");
-            System.out.println("5. Quay lại menu chính.");
+            System.out.println("5. Import Department từ file CSV.");
+            System.out.println("6. Quay lại menu chính.");
             System.out.print("Nhập lựa chọn: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -317,6 +331,9 @@ public class Function {// chứa các chức năng project có
                     this.suaDepartment();
                     break;
                 case "5":
+                    this.importDepartmentCSV();
+                    break;
+                case "6":
                     return;
                 default:
                     System.out.println("Nhập sai, nhập lại!");

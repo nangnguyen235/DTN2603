@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QLDepartmentRepositoryImpl implements IQLDepartmentRepository {
+
+    // ==================== Generic methods ====================
+
     @Override
     public List<Department> getAll() {
         List<Department> list = new ArrayList<>();
@@ -36,6 +39,46 @@ public class QLDepartmentRepositoryImpl implements IQLDepartmentRepository {
 
         return list;
     }
+
+    @Override
+    public boolean create(Department entity) {
+        return themDepartment(entity.getDepartmentName());
+    }
+
+    @Override
+    public boolean deleteById(Integer id) {
+        return xoaDepartmentTheoId(id);
+    }
+
+    @Override
+    public boolean update(Integer id, Department entity) {
+        return suaDepartmentNameTheoId(id, entity.getDepartmentName());
+    }
+
+    @Override
+    public boolean checkExist(Integer id) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+
+            String sql = "SELECT * FROM department WHERE department_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return true;// tồn tại
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.closeConnection(connection);
+        }
+        return false;
+    }
+
+    // ==================== Department-specific methods ====================
 
     @Override
     public boolean themDepartment(String departmentName) {
@@ -85,6 +128,29 @@ public class QLDepartmentRepositoryImpl implements IQLDepartmentRepository {
             return c > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkExistByName(String departmentName) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+
+            String sql = "SELECT * FROM department WHERE department_name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, departmentName);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return true;// tồn tại
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.closeConnection(connection);
         }
         return false;
     }

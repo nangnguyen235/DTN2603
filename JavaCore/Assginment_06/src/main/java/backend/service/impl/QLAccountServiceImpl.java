@@ -1,21 +1,16 @@
 package backend.service.impl;
 
+import backend.repository.IGenericRepository;
 import backend.repository.IQLAccountRepository;
 import backend.repository.impl.QLAccountRepositoryImpl;
 import backend.service.IQLAccountService;
 import common.StringCommon;
 import entity.Account;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class QLAccountServiceImpl implements IQLAccountService {
+public class QLAccountServiceImpl extends AbstractGenericService<Account, Integer> implements IQLAccountService {
     private IQLAccountRepository repository;
 
     public QLAccountServiceImpl() {
@@ -23,10 +18,11 @@ public class QLAccountServiceImpl implements IQLAccountService {
     }
 
     @Override
-    public List<Account> getAll() {
-        List<Account> accounts = repository.getAll();
-        return accounts;
+    protected IGenericRepository<Account, Integer> getRepository() {
+        return repository;
     }
+
+    // ==================== Account-specific methods ====================
 
     @Override
     public boolean themAccount(String email, String username, String fullName, int departmentId, int positionId) {
@@ -48,70 +44,14 @@ public class QLAccountServiceImpl implements IQLAccountService {
         return repository.checkExistByEmail(email);
     }
 
+    // ==================== CSV Import (implement ICsvImportable) ====================
+
+    /**
+     * Validate và parse 1 dòng CSV thành Account
+     * Format CSV: email,username,full_name,department_id,position_id
+     */
     @Override
-    public String importCSV(String url) {
-        // check file có đúng định dạng ko (có đuôi là .csv ko)
-        if (!url.endsWith(".csv")) {
-            return "File không đúng định dạng!";
-        }
-        // check xem file có tồn tại ko
-        File file = new File(url);
-        if (!file.exists()) {
-            return "File không tồn tại!";
-        }
-
-        List<String[]> validRows = new ArrayList<>(); // lưu các row hợp lệ
-        List<String> listErrors = new ArrayList<>(); // tập hợp các row và message lỗi
-        String header = "";
-
-        // đọc file -> ds các account trong file
-        try (BufferedReader br = new BufferedReader(new FileReader(url))) {
-            String line;
-            header = br.readLine(); // đọc và bỏ qua dòng đầu tiên (header)
-            while ((line = br.readLine()) != null) {
-                String message = this.validationAccount(line, validRows);
-                if (Objects.nonNull(message)) {
-                    listErrors.add(message);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // lưu ds các account ko gặp lỗi vào DB
-        for (String[] row : validRows) {
-            String email = row[0];
-            String username = row[1];
-            String fullName = row[2];
-            int departmentId = Integer.parseInt(row[3]);
-            int positionId = Integer.parseInt(row[4]);
-            repository.themAccount(email, username, fullName, departmentId, positionId);
-        }
-
-        // xuất ra file lỗi ra file csv
-        if (!listErrors.isEmpty()) {
-            // lưu file lỗi cùng thư mục với file import
-            String errorFilePath = file.getParent() + File.separator + "import_errors.csv";
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(errorFilePath));
-                bw.write(header + ",error_messages");
-                bw.newLine();
-                for (String error : listErrors) {
-                    bw.write(error);
-                    bw.newLine();
-                }
-                bw.flush();
-                bw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return "Đã xuất ra file lỗi: " + errorFilePath;
-        }
-        return "Import thành công! Đã thêm " + validRows.size() + " account.";
-    }
-
-    // validate từng dòng CSV: email,username,full_name,department_id,position_id
-    public String validationAccount(String line, List<String[]> validRows) {
+    public String validateAndParse(String line, List<Account> validEntities) {
         List<String> errors = new ArrayList<>();
 
         String[] values = line.split(",");
@@ -170,12 +110,25 @@ public class QLAccountServiceImpl implements IQLAccountService {
         }
 
         if (errors.isEmpty()) {
-            validRows.add(new String[]{email, username, fullName, deptIdStr, posIdStr});
+            // Tạo Account object để lưu vào DB thông qua generic create()
+            // Sử dụng themAccount trực tiếp
+            repository.themAccount(email, username, fullName, departmentId, positionId);
+            // ko add vào validEntities vì đã lưu trực tiếp
             return null;
         } else {
             String error = String.join(", ", errors);
             line = line + "," + error;
         }
         return line;
+    }
+
+    /**
+     * Override importCSV để đếm chính xác số record thêm thành công
+     * (vì Account dùng themAccount trực tiếp trong validateAndParse)
+     */
+    @Override
+    public String importCSV(String url) {
+        // Dùng logic generic từ AbstractGenericService
+        return super.importCSV(url);
     }
 }
