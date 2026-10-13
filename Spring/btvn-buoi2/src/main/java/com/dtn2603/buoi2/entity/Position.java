@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.entity;
+package com.dtn2603.buoi2.entity;
 
 import com.dtn2603.buoi2.entity.enums.PositionName;
 import jakarta.persistence.*;

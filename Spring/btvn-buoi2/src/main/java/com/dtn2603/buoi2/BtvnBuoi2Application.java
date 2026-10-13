@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity;
+package com.dtn2603.buoi2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

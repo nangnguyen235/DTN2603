@@ -1,7 +1,5 @@
-package com.dtn2603.buoi2.entity.entity;
+package com.dtn2603.buoi2.entity;
 
-import com.dtn2603.buoi2.entity.Department;
-import com.dtn2603.buoi2.entity.Position;
 import com.dtn2603.buoi2.entity.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

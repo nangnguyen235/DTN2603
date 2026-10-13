@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.exception;
+package com.dtn2603.buoi2.exception;
 
 
 import com.dtn2603.buoi2.dto.ErrorResponse;

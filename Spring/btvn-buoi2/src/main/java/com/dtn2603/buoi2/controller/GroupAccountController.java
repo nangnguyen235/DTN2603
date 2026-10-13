@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.controller;
+package com.dtn2603.buoi2.controller;
 
 
 import com.dtn2603.buoi2.dto.GroupAccountRequest;

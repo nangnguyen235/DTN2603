@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.service.impl;
+package com.dtn2603.buoi2.service.impl;
 
 import com.dtn2603.buoi2.dto.AccountResponse;
 import com.dtn2603.buoi2.repository.IGroupAccountRepository;

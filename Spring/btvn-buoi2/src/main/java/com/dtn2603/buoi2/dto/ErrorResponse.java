@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.dto;
+package com.dtn2603.buoi2.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.dtn2603.buoi2.entity.config;
+package com.dtn2603.buoi2.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
